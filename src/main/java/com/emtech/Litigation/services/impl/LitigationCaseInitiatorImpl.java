@@ -4,32 +4,32 @@ import com.emtech.Litigation.dtos.LitigationCaseDTO;
 import com.emtech.Litigation.models.LitigationCase;
 import com.emtech.Litigation.repositories.LitigationCaseRepository;
 import com.emtech.Litigation.services.LitigationCaseInitiator;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LitigationCaseInitiatorImpl implements LitigationCaseInitiator {
 
+    private final LitigationCaseRepository caseRepository;
+    private final ModelMapper modelMapper;
 
-        private final LitigationCaseRepository caseRepository;
-
-        public LitigationCaseInitiatorImpl(LitigationCaseRepository caseRepository) {
-            this.caseRepository = caseRepository;
-        }
-    public void processCaseData(LitigationCaseDTO litigationCaseDTO) {
-        // Convert DTO to entity
-        LitigationCase litigationCase = convertDTOToEntity(litigationCaseDTO);
-        // Add any validation or processing logic here if needed
-        caseRepository.save(litigationCase);
+    @Autowired
+    public LitigationCaseInitiatorImpl(LitigationCaseRepository caseRepository, ModelMapper modelMapper) {
+        this.caseRepository = caseRepository;
+        this.modelMapper = modelMapper;
     }
-    private LitigationCase convertDTOToEntity(LitigationCaseDTO litigationCaseDTO) {
-        LitigationCase litigationCase = new LitigationCase();
-        // Copy fields from DTO to entity
-        // For example:
-        litigationCase.setId(litigationCaseDTO.getId());
-        litigationCase.setCaseReferenceNumber(litigationCaseDTO.getCaseReferenceNumber());
-        // Continue for all fields
-        return litigationCase;
+
+
+    @Override
+    public void processCaseData(LitigationCaseDTO litigationCaseDTO) {
+                try {
+            LitigationCase litigationCase = modelMapper.map(litigationCaseDTO, LitigationCase.class);
+            caseRepository.save(litigationCase);
+        } catch (Exception e) {
+
+            throw new RuntimeException("Failed to process case data", e);
+        }
     }
 
 }
-
