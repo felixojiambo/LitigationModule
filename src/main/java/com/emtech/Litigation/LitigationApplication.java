@@ -8,6 +8,7 @@ public class LitigationApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LitigationApplication.class, args);
+		System.out.println("Software Engineer");
 	}
 
 }
