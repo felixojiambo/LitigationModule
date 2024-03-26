@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class LitigationCase {
+    public class LitigationCaseDTO {
         private Long id;
         private String caseReferenceNumber;
         private String firstName;

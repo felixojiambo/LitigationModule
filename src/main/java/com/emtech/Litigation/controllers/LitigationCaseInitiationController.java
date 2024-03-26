@@ -1,5 +1,6 @@
 package com.emtech.Litigation.controllers;
 
+import com.emtech.Litigation.dtos.LitigationCaseDTO;
 import com.emtech.Litigation.models.LitigationCase;
 import com.emtech.Litigation.repositories.LitigationCaseRepository;
 import com.emtech.Litigation.services.LitigationCaseInitiator;
@@ -21,8 +22,8 @@ public class LitigationCaseInitiationController {
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<String> receiveCaseData(@RequestBody LitigationCase litigationCase) {
-        litigationCaseInitiator.processCaseData(litigationCase);
+    public ResponseEntity<String> receiveCaseData(@RequestBody LitigationCaseDTO litigationCaseDTO) {
+        litigationCaseInitiator.processCaseData(litigationCaseDTO);
         return new ResponseEntity<>("Case data received and processed successfully", HttpStatus.OK);
     }
     }

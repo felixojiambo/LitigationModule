@@ -1,5 +1,9 @@
 package com.emtech.Litigation.services;
-import com.emtech.Litigation.models.LitigationCase;
+
+import com.emtech.Litigation.dtos.LitigationCaseDTO;
+
+;
+
 public interface LitigationCaseInitiator {
-    void processCaseData(LitigationCase litigationCase);
+    void processCaseData(LitigationCaseDTO litigationCaseDTO);
 }
