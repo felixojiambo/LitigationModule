@@ -47,7 +47,8 @@ public class DemandLetterServiceImpl implements DemandLetterService {
         // Set other fields as needed...
 
         // Example of generating a simple text representation
-        String letter = "Dear " + demandLetter.getClientName() + ",\n\n" +
+        String letter;
+        letter = "Dear " + demandLetter.getClientName() + ",\n\n" +
                 "This is to notify you of the outstanding amount due under your loan agreement.\n\n" +
                 "Please make the payment by " + demandLetter.getPaymentDeadline() + ".\n\n" +
                 "Thank you,\n" +
