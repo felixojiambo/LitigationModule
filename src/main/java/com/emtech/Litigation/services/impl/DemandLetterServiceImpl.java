@@ -1,10 +1,13 @@
 package com.emtech.Litigation.services.impl;
 import com.emtech.Litigation.models.DemandLetter;
+import com.emtech.Litigation.models.LitigationCase;
 import com.emtech.Litigation.repositories.DemandLetterRepository;
+import com.emtech.Litigation.repositories.LitigationCaseRepository;
 import com.emtech.Litigation.services.DemandLetterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,10 +15,12 @@ import java.util.Optional;
 public class DemandLetterServiceImpl implements DemandLetterService {
 
     private final DemandLetterRepository demandLetterRepository;
+    private final LitigationCaseRepository litigationCaseRepository;
 
     @Autowired
-    public DemandLetterServiceImpl(DemandLetterRepository demandLetterRepository) {
+    public DemandLetterServiceImpl(DemandLetterRepository demandLetterRepository, LitigationCaseRepository litigationCaseRepository) {
         this.demandLetterRepository = demandLetterRepository;
+        this.litigationCaseRepository = litigationCaseRepository;
     }
 
     public List<DemandLetter> findAll() {
@@ -27,7 +32,20 @@ public class DemandLetterServiceImpl implements DemandLetterService {
     }
 
     // Method to generate a demand letter
-    public String generateDemandLetter(DemandLetter demandLetter) {
+    public String generateDemandLetter(String caseReferenceNumber) {
+        LitigationCase litigationCase = litigationCaseRepository.findByCaseReferenceNumber(caseReferenceNumber);
+        if (litigationCase == null) {
+            throw new IllegalArgumentException("Litigation case not found with case reference number " + caseReferenceNumber);
+        }
+
+        // Assuming DemandLetter has a constructor or setters to set these values
+        DemandLetter demandLetter = new DemandLetter();
+        demandLetter.setRefNumber(litigationCase.getCaseReferenceNumber());
+        demandLetter.setDate(new Date()); // Set current date
+        demandLetter.setClientName(litigationCase.getFirstName() + " " + litigationCase.getLastName());
+        demandLetter.setClientAddress(litigationCase.getPostalAddress());
+        // Set other fields as needed...
+
         // Example of generating a simple text representation
         String letter = "Dear " + demandLetter.getClientName() + ",\n\n" +
                 "This is to notify you of the outstanding amount due under your loan agreement.\n\n" +
@@ -56,44 +74,4 @@ public class DemandLetterServiceImpl implements DemandLetterService {
     }
 }
 
-//
-//import com.emtech.Litigation.models.DemandLetter;
-//import com.emtech.Litigation.models.LitigationCase;
-//import com.emtech.Litigation.repositories.DemandLetterRepository;
-//import com.emtech.Litigation.repositories.LitigationCaseRepository;
-//import com.emtech.Litigation.services.DemandLetterService;
-//import org.springframework.stereotype.Service;
-//
-//@Service
-//public class DemandLetterServiceImpl implements DemandLetterService {
-//
-//    private final LitigationCaseRepository litigationCaseRepository;
-//    private final DemandLetterRepository demandLetterRepository;
-//
-//    public DemandLetterServiceImpl(LitigationCaseRepository litigationCaseRepository, DemandLetterRepository demandLetterRepository) {
-//        this.litigationCaseRepository = litigationCaseRepository;
-//        this.demandLetterRepository = demandLetterRepository;
-//    }
-//
-//    public void generateDemandLetter(String caseReferenceNumber) {
-//        if (caseReferenceNumber == null || caseReferenceNumber.isEmpty()) {
-//
-//            return;
-//        }
-//
-//        LitigationCase litigationCase = litigationCaseRepository.findByCaseReferenceNumber(caseReferenceNumber);
-//        if (litigationCase == null) {
-//
-//            return;
-//        }
-//
-//        DemandLetter demandLetter = new DemandLetter();
-//        demandLetter.setFirstName(litigationCase.getFirstName());
-//        demandLetter.setLastName(litigationCase.getLastName());
-//        // we add more fields based on what we have in our litigation model
-//
-//        demandLetterRepository.save(demandLetter);
-//
-//    }
-//
-//}
+

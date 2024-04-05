@@ -29,8 +29,8 @@ public class DemandLetterController {
     }
 
     @PostMapping("/generate")
-    public String generateDemandLetter(@RequestBody DemandLetter demandLetter) {
-        return demandLetterService.generateDemandLetter(demandLetter);
+    public String generateDemandLetter(@RequestBody String caseReferenceNumber) {
+        return demandLetterService.generateDemandLetter(caseReferenceNumber);
     }
 
     @PostMapping("/send/{id}")
