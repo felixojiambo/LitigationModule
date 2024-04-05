@@ -44,9 +44,8 @@ public class DemandLetterServiceImpl implements DemandLetterService {
         demandLetter.setDate(new Date()); // Set current date
         demandLetter.setClientName(litigationCase.getFirstName() + " " + litigationCase.getLastName());
         demandLetter.setClientAddress(litigationCase.getPostalAddress());
-        // Set other fields as needed...
-
-        // Example of generating a simple text representation
+        // Set other fields
+        // generating a simple text representation
         String letter;
         letter = "Dear " + demandLetter.getClientName() + ",\n\n" +
                 "This is to notify you of the outstanding amount due under your loan agreement.\n\n" +
