@@ -44,6 +44,22 @@ import java.util.Date;
         private String loanDescription;
         private Date caseCreationDate;
         private String caseCreatedBy;
+    private String refNumber; // Our Ref
+    private Date date;         // Date
+    private String clientName; // Recipient's Name
+    private String clientAddress; // Recipient's Address (including street, building, city, postal code, country)
+    private String subject;    // Subject of the letter (e.g., Termination of Service Contract)
+    private String contractDetails; // Details of the contract (e.g., Contract number, location)
+    private String terminationReason; // Reason for termination
+    private Date contractStartDate; // Contract start date
+    private Date contractEndDate;   // Contract end date
+    private Date terminationNoticeDate; // Date of termination notice
+    private String paymentAmount;   // Amount to be paid
+    private String paymentDeadline; // Deadline for payment
+    private String paymentInstructions; // Payment instructions (e.g., Bank details)
+    private String lawyerName;     // Name of the lawyer or law firm
+    private String lawyerAddress; // Address of the lawyer or law firm
+    private String ccRecipient;    // Copy recipient (e.g., Client)
+    private boolean sent;
 
-    }
-
+}

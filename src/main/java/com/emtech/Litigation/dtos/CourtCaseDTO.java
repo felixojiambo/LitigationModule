@@ -12,6 +12,6 @@ import java.util.List;
 public class CourtCaseDTO {
     private String caseReferenceNumber;
    private List<PartyDTO> parties;
-
+    private List<DocumentsDTO> documents;
 
 }
