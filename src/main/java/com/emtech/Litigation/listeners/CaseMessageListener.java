@@ -17,6 +17,6 @@ public class CaseMessageListener {
 
     @RabbitListener(queues = "newCaseQueue")
     public void handleNewCase(LitigationCaseDTO litigationCaseDTO) {
-        litigationCaseInitiator.processCaseData(litigationCaseDTO);
+        litigationCaseInitiator.processClientData(litigationCaseDTO);
     }
 }

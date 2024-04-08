@@ -1,4 +1,5 @@
 package com.emtech.Litigation.messages;
+import com.emtech.Litigation.dtos.LitigationCaseDTO;
 import com.emtech.Litigation.services.LitigationCaseInitiator;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class ClientManagementMessageConsumer {
     }
 
     @RabbitListener(queues = "newCaseQueue")
-    public void consumeMessage(ClientManagementDTO clientManagementDTO) {
-        litigationCaseInitiator.processClientData(clientManagementDTO);
+    public void consumeMessage(LitigationCaseDTO litigationCaseDTO) {
+        litigationCaseInitiator.processClientData(litigationCaseDTO);
     }
 }
