@@ -6,4 +6,6 @@ import com.emtech.Litigation.dtos.LitigationCaseDTO;
 
 public interface LitigationCaseInitiator {
     void processCaseData(LitigationCaseDTO litigationCaseDTO);
+
+    void fetchAndProcessCaseData(String caseId);
 }
